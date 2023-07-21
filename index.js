@@ -220,7 +220,7 @@ if (heroku.dockerBuildArgs) {
     console.log("Created and wrote to ~/.netrc");
 
     createProcfile(heroku);
-    bundleUpdate(heroku);
+    // bundleUpdate(heroku);
       
     if (heroku.usedocker) {
       execSync("heroku container:login");
