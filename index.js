@@ -64,10 +64,10 @@ const createProcfile = ({ procfile, appdir }) => {
 };
 
 const bundleUpdate = ({ appdir }) => {
-    const path = path.join(appdir, "Gemfile");
-    let content = fs.readFileSync(path, 'utf8');
+    const gemPath = path.join(appdir, "Gemfile");
+    let content = fs.readFileSync(gemPath, 'utf8');
     content = content.replace(/^gem 'optics_view_components', path: '\.\.\/'$/g, "gem 'optics_view_components'");
-    fs.writeFileSync(path, content, 'utf8');
+    fs.writeFileSync(gemPath, content, 'utf8');
     execSync(`bundle && git add -A && git commit -m "Bundle update"`);
     console.log("Bundle updated and commited");
 };
