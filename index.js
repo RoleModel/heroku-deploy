@@ -68,7 +68,7 @@ const bundleUpdate = ({ appdir }) => {
     let content = fs.readFileSync(gemPath, 'utf8');
     content = content.replace(/^gem 'optics_view_components', path: '\.\.\/'$/g, "gem 'optics_view_components'");
     fs.writeFileSync(gemPath, content, 'utf8');
-    execSync(`bundle && git add -A && git commit -m "Bundle update"`);
+    execSync(`git add -A && git commit -m "Bundle update"`);
     console.log("Bundle updated and commited");
 };
 
