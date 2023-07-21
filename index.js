@@ -63,6 +63,15 @@ const createProcfile = ({ procfile, appdir }) => {
   }
 };
 
+const bundleUpdate = ({ appdir }) => {
+    const path = path.join(appdir, "Gemfile");
+    let content = fs.readFileSync(path, 'utf8');
+    content = content.replace(/^gem 'optics_view_components', path: '\.\.\/'$/g, "gem 'optics_view_components'");
+    fs.writeFileSync(path, content, 'utf8');
+    execSync(`bundle && git add -A && git commit -m "Bundle update"`);
+    console.log("Bundle updated and commited");
+};
+
 const deploy = ({
   dontuseforce,
   app_name,
@@ -211,7 +220,8 @@ if (heroku.dockerBuildArgs) {
     console.log("Created and wrote to ~/.netrc");
 
     createProcfile(heroku);
-
+    bundleUpdate(heroku);
+      
     if (heroku.usedocker) {
       execSync("heroku container:login");
     }
